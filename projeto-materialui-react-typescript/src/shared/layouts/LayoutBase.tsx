@@ -5,13 +5,13 @@ import { useDrawerContext } from "../contexts";
 
 interface ILayoutBaseProps {
   title: string;
-  toolBar?: ReactNode;
+  BarraDeFerramentas?: ReactNode;
 
   children: ReactNode;
 }
 
 
-export const LayoutBase:React.FC<ILayoutBaseProps> = ({children, title, toolBar}) => {
+export const LayoutBase:React.FC<ILayoutBaseProps> = ({children, title, BarraDeFerramentas: toolBar}) => {
   const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const mdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const theme = useTheme();
