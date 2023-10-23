@@ -18,8 +18,7 @@ interface IFerramentasDeListagemProps {
   textoBotaoNovo = 'Novo',
   mostrarBotaoNovo = true
  }) => {
-  const theme = useTheme()
-
+  const theme = useTheme();
   return(
     <Box
     alignItems="center"
