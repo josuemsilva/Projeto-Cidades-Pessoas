@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Icon, Paper, Skeleton, useTheme } from "@mui/material"
+import { Box, Button, Divider, Icon, Paper, Skeleton, Theme, Typography, useMediaQuery, useTheme } from "@mui/material"
 
 
 interface IFerramentasDeDetalheProps {
@@ -47,6 +47,8 @@ mostrarBotaoSalvarCarregando = false,
 mostrarBotaoSalvarEFecharCarregando = false,
 
 }) => {
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const theme = useTheme();
 
   return (
@@ -65,46 +67,61 @@ mostrarBotaoSalvarEFecharCarregando = false,
         variant="contained"
         onClick={aoClicarEmSalvar}
         startIcon={<Icon>save</Icon>}>
-
-        Salvar</Button>)}
+        <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+        {!smDown && ('Salvar')}
+        </Typography>
+      </Button>)}
 
     {mostrarBotaoSalvarCarregando && (<Skeleton width={108} height={60}/>)}
 
-    {(mostrarBotaoSalvarEFechar && !mostrarBotaoSalvarEFecharCarregando) && (<Button
+    {(mostrarBotaoSalvarEFechar && !mostrarBotaoSalvarEFecharCarregando && !smDown && !mdDown) && (<Button
         disableElevation
         variant="outlined"
         onClick={aoClicarEmSalvarEFechar}
         startIcon={<Icon>save</Icon>}>
-        Salvar e voltar</Button>)}
+        <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+        Salvar e voltar
+        </Typography>
+      </Button>)}
 
-    {mostrarBotaoSalvarEFecharCarregando && (<Skeleton width={160} height={60}/>)}
+    {(mostrarBotaoSalvarEFecharCarregando && !smDown && !mdDown) && (<Skeleton width={160} height={60}/>)}
 
     {(mostrarBotaoApagar && !mostrarBotaoApagarCarregando) && (<Button
         disableElevation
         variant="outlined"
         onClick={aoClicarEmApagar}
         startIcon={<Icon>delete</Icon>}>
-        Apagar</Button>)}
+        <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+        {!smDown && ('Apagar')}
+        </Typography>
+      </Button>)}
 
     {mostrarBotaoApagarCarregando && (<Skeleton width={108} height={60}/>)}
 
-    {(mostrarBotaoNovo && !mostrarBotaoNovoCarregando) && (<Button
+    {(mostrarBotaoNovo && !mostrarBotaoNovoCarregando && !smDown) && (<Button
         disableElevation
         variant="outlined"
         onClick={aoClicarEmNovo}
         startIcon={<Icon>add</Icon>}>
-        {textoBotaoNovo}</Button>)}
+        <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+        {textoBotaoNovo}
+        </Typography>
+      </Button>)}
 
-      {(mostrarBotaoNovoCarregando && !mostrarBotaoNovoCarregando) && (<Skeleton width={108} height={60}/>)}
+      {(mostrarBotaoNovoCarregando && !smDown) && (<Skeleton width={108} height={60}/>)}
 
-      <Divider variant="middle" orientation="vertical"/>
+      {(mostrarBotaoVoltar &&
+        (mostrarBotaoNovo || mostrarBotaoApagar || mostrarBotaoSalvar || mostrarBotaoSalvarEFechar))&&(<Divider variant="middle" orientation="vertical"/>)}
 
     {(mostrarBotaoVoltar && !mostrarBotaoVoltarCarregando) && (<Button
         disableElevation
         variant="outlined"
         onClick={aoClicarEmVoltar}
         startIcon={<Icon>arrow_back</Icon>}>
-        Voltar</Button>)}
+        <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+        {!smDown && ('Voltar')}
+        </Typography>
+      </Button>)}
 
       {mostrarBotaoVoltarCarregando && (<Skeleton width={108} height={60}/>)}
 

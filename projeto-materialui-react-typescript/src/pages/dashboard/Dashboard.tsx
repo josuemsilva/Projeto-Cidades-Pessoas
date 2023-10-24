@@ -5,7 +5,11 @@ export const Dashboard = () => {
   return(
     <LayoutBase
     title="Página inicial"
-    BarraDeFerramentas={(<FerramentasDeDetalhe mostrarBotaoSalvarEFechar mostrarBotaoSalvarCarregando/>)}>
+    BarraDeFerramentas={(<FerramentasDeDetalhe
+    mostrarBotaoSalvarEFechar
+    mostrarBotaoNovo
+    mostrarBotaoSalvarEFecharCarregando
+    mostrarBotaoSalvar={false}/>)}>
       Teste
     </LayoutBase>
   );
