@@ -9,7 +9,7 @@ export const Dashboard = () => {
     mostrarBotaoSalvarEFechar
     mostrarBotaoNovo
     mostrarBotaoSalvarEFecharCarregando
-    mostrarBotaoSalvar={false}/>)}>
+    mostrarBotaoVoltar={false}/>)}>
       Teste
     </LayoutBase>
   );
