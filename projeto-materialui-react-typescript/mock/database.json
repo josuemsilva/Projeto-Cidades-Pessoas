@@ -1,12 +1,6 @@
 {
   "pessoas": [
     {
-      "id": 3,
-      "email": "pedro@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Pedro Silva"
-    },
-    {
       "id": 4,
       "email": "Jjoseuca@email.com",
       "cidadeId": 40600,
