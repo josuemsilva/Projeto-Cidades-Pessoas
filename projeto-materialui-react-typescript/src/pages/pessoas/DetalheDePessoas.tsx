@@ -1,5 +1,6 @@
 import { Form } from '@unform/web';
-import {useState, useEffect } from 'react';
+import { FormHandles } from '@unform/core';
+import {useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 
 import { VTextField } from '../../shared/forms';
@@ -11,37 +12,64 @@ export const DetalheDePessoas: React.FC = () => {
   const { id = 'nova' } = useParams<'id'>();
   const navigate = useNavigate();
 
+  const formRef = useRef<FormHandles>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [nome, setNome] = useState();
 
   useEffect(() => {
-    if(id !== 'nova') {
+    if (id !== 'nova') {
       setIsLoading(true);
 
       PessoasService.getById(Number(id))
-      .then((result) => {
-        setIsLoading(false);
+        .then((result) => {
+          setIsLoading(false);
 
-        if(result instanceof Error) {
+          if (result instanceof Error) {
             alert(result.message);
             navigate('/pessoas');
-        } else {
+          } else {
             setNome(result.nomeCompleto);
-            console.log(result);
-        }
-      });
+
+            formRef.current?.setData(result);
+          }
+        });
     }
   }, [id, navigate]);
 
-  const handleSave = () => {
-    console.log('Save');
+  const handleSave = (dados: IFormData) => {
+    setIsLoading(true);
+
+    if (id === 'nova') {
+      PessoasService.create(dados)
+        .then((result) => {
+          setIsLoading(false);
+          if (result instanceof Error) {
+            alert(result.message);
+          } else {
+            navigate(`/pessoas/detalhe/${result}`);
+          }
+        });
+    } else {
+      setIsLoading(true);
+
+      PessoasService.updateById(Number(id), { id: Number(id), ...dados })
+        .then((result) => {
+          setIsLoading(false);
+          if (result instanceof Error) {
+            alert(result.message);
+          } else {
+            navigate(`/pessoas/detalhe/${result}`);
+          }
+        });
+    }
   };
 
-  const handleDelete = (id:number) => {
-    if(confirm('Realmente deseja apagar?')) {
-        PessoasService.deleteById(id)
+  const handleDelete = (id: number) => {
+    if (window.confirm('Realmente deseja apagar?')) {
+      PessoasService.deleteById(id)
         .then(result => {
-          if(result instanceof Error) {
+          if (result instanceof Error) {
             alert(result.message)
           } else {
             alert('Registro apagado com sucesso!');
@@ -51,37 +79,40 @@ export const DetalheDePessoas: React.FC = () => {
     }
   };
 
-
   return (
     <LayoutBase
-    title= {id === 'nova' ? 'Nova pessoa' : nome}
-    BarraDeFerramentas={
-      <FerramentasDeDetalhe
-      mostrarBotaoApagar={id !== 'nova'}
-      mostrarBotaoNovo={id !== 'nova'}
-      mostrarBotaoSalvarEFechar
-      textoBotaoNovo="Nova"
+      title={id === 'nova' ? 'Nova pessoa' : nome}
+      BarraDeFerramentas={
+        <FerramentasDeDetalhe
+          textoBotaoNovo="Nova"
+          mostrarBotaoSalvarEFechar
+          mostrarBotaoNovo={id !== 'nova'}
+          mostrarBotaoApagar={id !== 'nova'}
 
-      aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
-      aoClicarEmApagar={() => handleDelete(Number(id))}
-      aoClicarEmVoltar={() => navigate('/pessoas')}
-      aoClicarEmSalvarEFechar={handleSave}
-      aoClicarEmSalvar={handleSave}
-      />
-    }
-  >
-
-      <Form onSubmit={(dados) => console.log(dados)}>
-
-        <VTextField
-          name='nomeCompleto'
-
+          aoClicarEmVoltar={() => navigate('/pessoas')}
+          aoClicarEmApagar={() => handleDelete(Number(id))}
+          aoClicarEmSalvar={() => formRef.current?.submitForm()}
+          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmSalvarEFechar={() => formRef.current?.submitForm()}
         />
+      }
+    >
 
-        <button type='submit'>Submit</button>
+      <Form ref={formRef} onSubmit={handleSave}>
+        <VTextField placeholder='Nome completo' name='nomeCompleto' />
+        <VTextField placeholder='Email' name='email' />
+        <VTextField placeholder='ID da cidade' name='cidadeId' />
+        {/* {[1, 2, 3, 4].map((_, index)=> (
+          <Scope key="" path={`endereco[${index}].rua`}>
+            <VTextField name="rua" />
+            <VTextField name="numero" />
+            <VTextField name="estado" />
+            <VTextField name="cidade" />
+            <VTextField name="pais" />
+          </Scope>
+        ))} */}
       </Form>
 
     </LayoutBase>
-
-  )
+  );
 };
