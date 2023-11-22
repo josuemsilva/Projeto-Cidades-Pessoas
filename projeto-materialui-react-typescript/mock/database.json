@@ -2,15 +2,15 @@
   "pessoas": [
     {
       "id": 4,
+      "nomeCompleto": "José Silvas",
       "email": "Jjoseuca@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "José Silva"
+      "cidadeId": 40600
     },
     {
       "id": 5,
+      "nomeCompleto": "Alfredo",
       "email": "alfredo@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Alfredo Silva"
+      "cidadeId": 40600
     },
     {
       "id": 6,
