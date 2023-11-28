@@ -1,6 +1,6 @@
 import {useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { VForm } from '../../shared/forms';
+import { IVFormErrors, VForm } from '../../shared/forms';
 import * as yup from 'yup';
 import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 
@@ -90,7 +90,7 @@ export const DetalheDePessoas: React.FC = () => {
       }
     })
     .catch((errors:yup.ValidationError) => {
-      const validationErrors: = {};
+      const validationErrors: IVFormErrors = {};
 
       errors.inner.forEach(error => {
         if(!error.path) return;
