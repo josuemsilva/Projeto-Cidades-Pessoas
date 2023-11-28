@@ -1,12 +1,13 @@
-import { VForm } from '../../shared/forms';
 import {useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import { VForm } from '../../shared/forms';
+import * as yup from 'yup';
 import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 
-import { VTextField, useVForm } from '../../shared/forms';
-import { LayoutBase } from "../../shared/layouts/LayoutBase";
-import { FerramentasDeDetalhe } from "../../shared/components";
 import { PessoasService } from "../../shared/services/pessoas/PessoasService";
+import { FerramentasDeDetalhe } from "../../shared/components";
+import { LayoutBase } from "../../shared/layouts/LayoutBase";
+import { VTextField, useVForm } from '../../shared/forms';
 
 interface IFormData {
   email: string;
@@ -14,6 +15,11 @@ interface IFormData {
   nomeCompleto: string;
 }
 
+const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
+  nomeCompleto: yup.string().required('Campo é obrigatório.').min(3, 'O campo precisa ter pelo menos 3 caracteres.'),
+  email: yup.string().required().email(),
+  cidadeId: yup.number().required().min(5),
+});
 
 export const DetalheDePessoas: React.FC = () => {
   const { id = 'nova' } = useParams<'id'>();
@@ -51,37 +57,52 @@ export const DetalheDePessoas: React.FC = () => {
   }, [id, navigate, formRef]);
 
   const handleSave = (dados: IFormData) => {
+    formValidationSchema.validate(dados, { abortEarly: false })
+    .then((dadosValidados) => {
+      if (id === 'nova') {
+        PessoasService.create(dadosValidados)
+          .then((result) => {
+            setIsLoading(false);
+            if (result instanceof Error) {
+              alert(result.message);
+            } else {
+              if (isSaveAndClose()) {
+                navigate('/pessoas');
+              } else {
+                navigate(`/pessoas/detalhe/${result}`);
+              }
+            }
+          });
+      } else {
+        setIsLoading(true);
+
+        PessoasService.updateById(Number(id), { id: Number(id), ...dadosValidados })
+          .then((result) => {
+            setIsLoading(false);
+            if (result instanceof Error) {
+              alert('result.message');
+            } else {
+                if(isSaveAndClose()) {
+                  navigate('/pessoas');
+                }
+            }
+          });
+      }
+    })
+    .catch((errors:yup.ValidationError) => {
+      const validationErrors: = {};
+
+      errors.inner.forEach(error => {
+        if(!error.path) return;
+
+        validationErrors[error.path] = error.message;
+      });
+      formRef.current?.setErrors(validationErrors);
+
+    });
+
     setIsLoading(true);
 
-    if (id === 'nova') {
-      PessoasService.create(dados)
-        .then((result) => {
-          setIsLoading(false);
-          if (result instanceof Error) {
-            alert(result.message);
-          } else {
-            if (isSaveAndClose()) {
-              navigate('/pessoas');
-            } else {
-              navigate(`/pessoas/detalhe/${result}`);
-            }
-          }
-        });
-    } else {
-      setIsLoading(true);
-
-      PessoasService.updateById(Number(id), { id: Number(id), ...dados })
-        .then((result) => {
-          setIsLoading(false);
-          if (result instanceof Error) {
-            alert('result.message');
-          } else {
-              if(isSaveAndClose()) {
-                navigate('/pessoas');
-              }
-          }
-        });
-    }
   };
 
   const handleDelete = (id: number) => {
