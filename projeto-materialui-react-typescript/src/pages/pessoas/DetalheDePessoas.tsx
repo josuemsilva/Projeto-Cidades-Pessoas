@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 
 import { PessoasService } from "../../shared/services/pessoas/PessoasService";
+import { AutoCompleteCidades } from './components/AutoCompleteCidades';
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBase } from "../../shared/layouts/LayoutBase";
 import { VTextField, useVForm } from '../../shared/forms';
@@ -18,7 +19,7 @@ interface IFormData {
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
   nomeCompleto: yup.string().required('Campo é obrigatório.').min(3, 'O campo precisa ter pelo menos 3 caracteres.'),
   email: yup.string().required().email(),
-  cidadeId: yup.number().required().min(5),
+  cidadeId: yup.number().required(),
 });
 
 export const DetalheDePessoas: React.FC = () => {
@@ -50,15 +51,16 @@ export const DetalheDePessoas: React.FC = () => {
     } else {
       formRef.current?.setData({
         nomeCompleto: '',
-        cidadeId: '',
+        cidadeId: undefined,
         email: '',
       });
     }
   }, [id, navigate, formRef]);
 
   const handleSave = (dados: IFormData) => {
+
     formValidationSchema.validate(dados, { abortEarly: false })
-    .then((dadosValidados) => {
+    .then((dadosValidados: IFormData) => {
       if (id === 'nova') {
         PessoasService.create(dadosValidados)
           .then((result) => {
@@ -97,11 +99,10 @@ export const DetalheDePessoas: React.FC = () => {
 
         validationErrors[error.path] = error.message;
       });
+
       formRef.current?.setErrors(validationErrors);
 
     });
-
-    setIsLoading(true);
 
   };
 
@@ -167,7 +168,7 @@ export const DetalheDePessoas: React.FC = () => {
               </Grid>
             </Grid>
             <Grid container item direction="row" spacing={2}>
-              <Grid item>
+              <Grid item xs={12} sm={8} md={6} lg={4} xl={2}>
 
                 <VTextField
                 fullWidth
@@ -179,15 +180,8 @@ export const DetalheDePessoas: React.FC = () => {
               </Grid>
             </Grid>
             <Grid container item direction="row" spacing={2}>
-              <Grid item>
-
-                <VTextField
-                fullWidth
-                name='cidadeId'
-                label='cidade'
-                disabled={isLoading}
-                />
-
+              <Grid item xs={12} sm={8} md={6} lg={4} xl={2}>
+                <AutoCompleteCidades isExternalLoading={isLoading}/>
               </Grid>
             </Grid>
 
