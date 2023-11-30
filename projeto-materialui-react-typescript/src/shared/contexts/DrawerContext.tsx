@@ -11,7 +11,7 @@ interface IDrawerContextData {
   isDrawerOpen: boolean;
   toggleDrawerOpen: () => void;
   drawerOptions: IDrawerOption[];
-  setDrawerOption: (newDrawerOptions: IDrawerOption[]) => void
+  setDrawerOptions: (newDrawerOptions: IDrawerOption[]) => void
 }
 
 interface AppThemeProviderProps {

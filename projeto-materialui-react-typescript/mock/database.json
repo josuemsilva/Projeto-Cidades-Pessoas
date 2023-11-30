@@ -1,100 +1,16 @@
 {
   "pessoas": [
     {
-      "id": 4,
-      "nomeCompleto": "José Silva",
-      "email": "Jjoseuca@email.com",
-      "cidadeId": 40600
-    },
-    {
-      "id": 5,
-      "nomeCompleto": "Alfredo Silva",
-      "email": "alfredo@email.com",
-      "cidadeId": 40600
-    },
-    {
-      "id": 6,
-      "email": "Juca@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Juca Silva"
-    },
-    {
-      "id": 7,
-      "email": "maria@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Maria Silva"
-    },
-    {
-      "id": 8,
-      "email": "pedro@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Pedro Silva"
-    },
-    {
-      "id": 9,
-      "email": "Jjoseuca@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "José Silva"
-    },
-    {
-      "id": 10,
-      "email": "alfredo@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Alfredo Silva"
-    },
-    {
-      "id": 11,
-      "email": "alfredo@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Alfredo Silva"
-    },
-    {
-      "id": 12,
-      "email": "Juca@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Juca Silva"
-    },
-    {
-      "id": 13,
-      "email": "maria@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Maria Silva"
-    },
-    {
-      "id": 14,
-      "email": "pedro@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "Pedro Silva"
-    },
-    {
-      "id": 15,
-      "email": "Jjoseuca@email.com",
-      "cidadeId": 40600,
-      "nomeCompleto": "José Silva"
-    },
-    {
       "nomeCompleto": "Josué",
       "email": "joojmoutinho45@gmail.com",
       "cidadeId": "1",
       "id": 16
-    },
+    }
+  ],
+  "cidades": [
     {
-      "nomeCompleto": "adriana",
-      "email": "email@email.com",
-      "cidadeId": "12",
-      "id": 17
-    },
-    {
-      "nomeCompleto": "Amanda Klein",
-      "email": "amandak@gmail.com",
-      "cidadeId": "123",
-      "id": 18
-    },
-    {
-      "id": 19,
-      "nomeCompleto": "mat",
-      "email": "mat-1@gmail.com",
-      "cidadeId": "6"
+      "nome": "Novo Hamburgo",
+      "id": 1
     }
   ]
 }
