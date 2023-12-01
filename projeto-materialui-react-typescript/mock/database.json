@@ -17,6 +17,30 @@
       "nomeCompleto": "maria2",
       "email": "maria2@gmail.com",
       "cidadeId": 2
+    },
+    {
+      "nomeCompleto": "André",
+      "email": "andre@gmail.com",
+      "cidadeId": 1,
+      "id": 19
+    },
+    {
+      "nomeCompleto": "Lavinia",
+      "email": "lavinia@gmail.com",
+      "cidadeId": 1,
+      "id": 20
+    },
+    {
+      "nomeCompleto": "José",
+      "email": "jose@gmail.com",
+      "cidadeId": 2,
+      "id": 21
+    },
+    {
+      "nomeCompleto": "Cléber",
+      "email": "cleber@gmail.com",
+      "cidadeId": 5,
+      "id": 22
     }
   ],
   "cidades": [
@@ -43,6 +67,14 @@
     {
       "nome": "Tramandaí",
       "id": 6
+    },
+    {
+      "nome": "Taquara",
+      "id": 7
+    },
+    {
+      "nome": "Canela",
+      "id": 8
     }
   ]
 }
