@@ -76,5 +76,8 @@
       "nome": "Canela",
       "id": 8
     }
-  ]
+  ],
+  "auth": {
+    "acessToken": "aaaa"
+  }
 }
