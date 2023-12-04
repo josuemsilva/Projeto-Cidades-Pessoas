@@ -7,18 +7,6 @@
       "cidadeId": 4
     },
     {
-      "cidadeId": 12,
-      "email": "adriana@gmail.com",
-      "nomeCompleto": "Adriana",
-      "id": 17
-    },
-    {
-      "id": 18,
-      "nomeCompleto": "maria2",
-      "email": "maria2@gmail.com",
-      "cidadeId": 2
-    },
-    {
       "nomeCompleto": "André",
       "email": "andre@gmail.com",
       "cidadeId": 1,
