@@ -20,7 +20,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: vite build
 
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
