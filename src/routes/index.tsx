@@ -30,13 +30,13 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path='/pagina-inicial' element={<Dashboard/>}/>
+      <Route exact path='/pagina-inicial' element={<Dashboard/>}/>
 
-      <Route path='/pessoas' element={<ListagemDePessoas/>}/>
-      <Route path='/pessoas/detalhe/:id' element={<DetalheDePessoas/>}/>
+      <Route exact path='/pessoas' element={<ListagemDePessoas/>}/>
+      <Route exact path='/pessoas/detalhe/:id' element={<DetalheDePessoas/>}/>
 
-      <Route path='/cidades' element={<ListagemDeCidades/>}/>
-      <Route path='/cidades/detalhe/:id' element={<DetalheDeCidades/>}/>
+      <Route exact path='/cidades' element={<ListagemDeCidades/>}/>
+      <Route exact path='/cidades/detalhe/:id' element={<DetalheDeCidades/>}/>
 
       <Route path='*' element={<Navigate to="/pagina-inicial"/>}/>
     </Routes>
