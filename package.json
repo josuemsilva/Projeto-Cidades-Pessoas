@@ -4,5 +4,9 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.14",
     "react-router-dom": "^6.17.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
   }
 }
