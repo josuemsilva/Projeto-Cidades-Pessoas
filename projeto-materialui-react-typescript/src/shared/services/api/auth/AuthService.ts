@@ -11,15 +11,14 @@ const auth = async (
   try {
     const { data } = await Api.get("/auth", { data: { email, password } });
 
-    if (data) {
-      return data;
+    if (data && data.acessToken) {
+      return { accessToken: data.acessToken };
     }
 
-    return new Error("Erro no login.");
+    return new Error("Error in login.");
   } catch (error) {
-    console.log(error);
     return new Error(
-      (error as { message: string }).message || "Erro no login."
+      (error as { message: string }).message || "Error in login."
     );
   }
 };
