@@ -53,7 +53,7 @@ export const MenuLateral:React.FC<AppThemeProviderProps> = ({children}) => {
         justifyContent="center">
         <Avatar
         sx={{height: theme.spacing(12), width: theme.spacing(12)}}
-        src="https://lh3.googleusercontent.com/a/ACg8ocKvOlohGOVLRJ22DCrQT-oNh84ukk-pu30PypYEVDTMq-StbH4=s260-c-no"/>
+        src="https://i.imgur.com/fvjRaUB.png"/>
         </Box>
 
       <Divider/>
